@@ -50,3 +50,16 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+*.log
+*.json
+*.lst
+*.M51
+*.plg
+*.bak
+*.lock
+Bigwork1.lnp
+Bigwork1
+DigitalTube.lst
+KeyBoard.lst
+LCD1602.lst
+.vscode
