@@ -1,9 +1,12 @@
 #include "Car.h"
 
-sbit LMA = P0 ^ 0;
-sbit LMB = P0 ^ 1;
-sbit RMA = P0 ^ 2;
-sbit RMB = P0 ^ 3; //左右两电机控制口
+#define HPWMT 0xFF //脉宽调制百分之一周期 当前周期：5ms
+#define LPWMT 0xD2
+
+sbit RMA = P0 ^ 0;
+sbit RMB = P0 ^ 1;
+sbit LMA = P0 ^ 2;
+sbit LMB = P0 ^ 3; //左右两电机控制口
 bit LmotorA = 0;
 bit LmotorB = 0;
 bit RmotorA = 0;
@@ -15,8 +18,8 @@ u8 RightPower = 100;
 
 void InitCar()
 {
-    SetCar(STOP, 100, 100);
-    TMOD |= 0x1; //设置定时器0为模式1
+    SetCar(STOP, 0, 0);
+    TMOD |= 0x01; //设置定时器0为模式1
     EA = 1; //使能中断
     ET0 = 1;
     TH0 = HPWMT; //设置定时初值

@@ -356,6 +356,11 @@
               <FileType>1</FileType>
               <FilePath>.\Hardware\Car.c</FilePath>
             </File>
+            <File>
+              <FileName>Infrared.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Hardware\Infrared.c</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>

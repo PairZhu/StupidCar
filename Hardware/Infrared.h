@@ -9,6 +9,12 @@ typedef unsigned int u16;
 
 #include <reg52.h>
 
+extern bit LeftIR;
+extern bit RightIR;
+extern bit FrontIR;
+
+void InitIR();
+
 #endif // !__INFRARED_H__
 
 

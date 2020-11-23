@@ -9,9 +9,6 @@ typedef unsigned int u16;
 
 #include <reg52.h>
 
-#define HPWMT 0xFF //脉宽调制百分之一周期 当前周期：5ms
-#define LPWMT 0xD2
-
 typedef enum {FORWARD, BACKWARD, LEFT, RIGHT, STOP}  CarMode;
 
 extern u8 LeftPower;
