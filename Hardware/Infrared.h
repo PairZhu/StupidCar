@@ -13,7 +13,7 @@ extern bit LeftIR;
 extern bit RightIR;
 extern bit FrontIR;
 
-void InitIR();
+void IRDetection();
 
 #endif // !__INFRARED_H__
 

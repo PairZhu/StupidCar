@@ -23,32 +23,32 @@ typedef unsigned int u16;
 void main()
 {
     InitCar();
-    InitIR();
     while(1)
     {
+        IRDetection();
         if(TURN_FORWARD)
         {
             SetCar(FORWARD,100,100);
-            while(TURN_FORWARD);
+            while(TURN_FORWARD) IRDetection();
         }
         if(TURN_LEFT)
         {
             SetCar(LEFT,100,100);
-            while(TURN_LEFT);
+            while(TURN_LEFT) IRDetection();
             if(INSIDE_LINE)
             {
                 SetCar(FORWARD,50,70);
-                while(INSIDE_LINE);
+                while(INSIDE_LINE) IRDetection();
             }
         }
         if(TURN_RIGHT)
         {
             SetCar(RIGHT,100,100);
-            while(TURN_RIGHT);
+            while(TURN_RIGHT) IRDetection();
             if(INSIDE_LINE)
             {
                 SetCar(FORWARD,70,50);
-                while(INSIDE_LINE);
+                while(INSIDE_LINE) IRDetection();
             }
         }
     }
