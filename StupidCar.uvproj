@@ -361,6 +361,11 @@
               <FileType>1</FileType>
               <FilePath>.\Hardware\Infrared.c</FilePath>
             </File>
+            <File>
+              <FileName>Bluetooth.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Hardware\Bluetooth.c</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>
