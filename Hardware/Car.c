@@ -3,14 +3,15 @@
 #define HPWMT 0xFF //脉宽调制百分之一周期 当前周期：5ms
 #define LPWMT 0xD2
 
-sbit RMA = P0 ^ 0;
-sbit RMB = P0 ^ 1;
-sbit LMA = P0 ^ 2;
-sbit LMB = P0 ^ 3; //左右两电机控制口
-bit LmotorA = 0;
-bit LmotorB = 0;
-bit RmotorA = 0;
-bit RmotorB = 0;
+sbit LMA = P1^2;
+sbit LMB = P1^3;
+sbit RMA = P1^4;
+sbit RMB = P1^5; //左右两电机控制口
+sbit LEN = P1^6;
+sbit REN = P1^7;
+
+bit REnable = 0;
+bit LEnable = 0;
 
 CarMode RunMode = STOP;
 u8 LeftPower = 100;
@@ -30,41 +31,45 @@ void InitCar()
 void SetCar(CarMode mode, u8 LPower, u8 RPower)
 {
     RunMode = mode;
+    LEnable = 0;
+    REnable = 0;
     switch (mode)
     {
     case FORWARD:
-        LmotorA = 1;
-        LmotorB = 0;
-        RmotorA = 1;
-        RmotorB = 0;
+        LMA = 1;
+        RMA = 1;
+        LMB = 0;
+        RMB = 0;
         break;
     case BACKWARD:
-        LmotorA = 0;
-        LmotorB = 1;
-        RmotorA = 0;
-        RmotorB = 1;
+        LMA = 0;
+        RMA = 0;
+        LMB = 1;
+        RMB = 1;
         break;
     case LEFT:
-        LmotorA = 0;
-        LmotorB = 1;
-        RmotorA = 1;
-        RmotorB = 0;
+        LMA = 0;
+        RMA = 1;
+        LMB = 1;
+        RMB = 0;
         break;
     case RIGHT:
-        LmotorA = 1;
-        LmotorB = 0;
-        RmotorA = 0;
-        RmotorB = 1;
+        LMA = 1;
+        RMA = 0;
+        LMB = 0;
+        RMB = 1;
         break;
     case STOP:
-        LmotorA = 0;
-        LmotorB = 0;
-        RmotorA = 0;
-        RmotorB = 0;
+        LMA = 0;
+        RMA = 0;
+        LMB = 0;
+        RMB = 0;
         break;
     }
     LeftPower = LPower;
     RightPower = RPower;
+    LEnable = 1;
+    REnable = 1;
 }
 
 void T0PWM() interrupt 1
@@ -74,24 +79,20 @@ void T0PWM() interrupt 1
     TL0 = LPWMT;
     if (i < LeftPower)
     {
-        LMA = LmotorA;
-        LMB = LmotorB;
+        LEN = LEnable;
     }
     else
     {
-        LMA = 0;
-        LMB = 0;
+        LEN = 0;
     }
 
     if (i < RightPower)
     {
-        RMA = RmotorA;
-        RMB = RmotorB;
+        REN = REnable;
     }
     else
     {
-        RMA = 0;
-        RMB = 0;
+        REN = 0;
     }
     if (i == 99)
         i = 0;

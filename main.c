@@ -13,17 +13,10 @@ typedef unsigned int u16;
 #define TURN_FORWARD (LeftIR == 0 && RightIR == 0)
 #define INSIDE_LINE (LeftIR == 1 && RightIR == 1)
 
-// sbit BUZZ=P0^6;
-
-// u8 code LedChar[] = {
-//     0x03, 0x9f, 0x25, 0x0d, 0x99,
-//     0x49, 0x41, 0x1f, 0x01, 0x09,
-// };
-
 void main()
 {
-    InitCar();
     InitIR();
+    InitCar();
     while(1)
     {
         if(TURN_FORWARD)
